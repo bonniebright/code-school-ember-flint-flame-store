@@ -71,11 +71,22 @@ App.ProductsDealsRoute = Ember.Route.extend({
     });
   }
 });
+
 App.ProductDetailsComponent = Ember.Component.extend({
-reviewsCount: Ember.computed.alias('product.reviews.length'),
-  hasReviews: function() {
+ reviewsCount: Ember.computed.alias('product.reviews.length'),
+  hasReviews: function(){
     return this.get('reviewsCount') > 0;
   }.property('reviewsCount')
+});
+App.ContactDetailsComponent = Ember.Component.extend({
+  productsCount: Ember.computed.alias('contact.products.length'),
+  isProductive: function() {
+    return this.get('productsCount') > 3;
+  }.property('productsCount')
+});
+App.ProductView = Ember.View.extend({
+  isOnSale: Ember.computed.alias('controller.isOnSale'),
+  classNameBindings: ['isOnSale']
 });
 App.Product = DS.Model.extend({
   title: DS.attr('string'),
@@ -145,7 +156,7 @@ App.Product.FIXTURES = [
     isOnSale: true,
     reviews: [],
     image: 'images/products/birch.png',
-    crafter: 200
+    crafter: 201
   }
 ];
 
@@ -161,14 +172,14 @@ App.Contact.FIXTURES = [
     name: 'Giamia',
     about: 'Although Giamia came from a humble spark of lightning, he quickly grew to be a great craftsman, providing all the warming instruments needed by those close to him.',
     avatar: 'images/contacts/giamia.png',
-    products: [1]
+    products: [1,4]
   },
   {
     id: 201,
     name: 'Anostagia',
     about: 'Knowing there was a need for it, Anostagia drew on her experience and spearheaded the Flint & Flame storefront. In addition to coding the site, she also creates a few products available in the store.',
     avatar: 'images/contacts/anostagia.png',
-    products: [2]
+    products: [2,3,5,6]
   }
 ];
 

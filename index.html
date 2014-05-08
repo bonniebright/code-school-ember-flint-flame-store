@@ -170,18 +170,21 @@
     <div class='col-sm-7'>
       <h2>{{product.title}}</h2>
       <p class='product-description'>{{product.description}}</p>
-      {{#if hasReviews}}
-      <p> Read all reviews {{reviewsCount}}. </p>
-      {{/if}}
       <p>{{#link-to 'product' product class='btn btn-success'}}
         Buy for ${{product.price}}{{/link-to}}
       </p>
+      {{#if hasReviews}}
+        <p class='text-muted'>Read all reviews ({{reviewsCount}}).</p>
+      {{/if}}
     </div>
   </script>
   <script type='text/x-handlebars' data-template-name='components/contact-details'>
     <div class='col-sm-9'>
       <h2>About {{contact.name}}</h2>
       <p>{{contact.about}}</p>
+      {{#if isProductive}}
+        <p class='text-muted'>Responsible for {{productsCount}} amazing products!</p>
+      {{/if}}
     </div>
     <div class='col-sm-3'>
       <img {{bind-attr src='contact.avatar' alt='contact.name'}} class='img-thumbnail img-rounded'/>
